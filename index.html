@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Control gastos mensuales</title>
+
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-+0n0xVW2eSR5OomGNYDnhzAbDsOXxcvSN1TPprVMTNDbiYZCxYbOOl7+AMvyTG2x" crossorigin="anonymous">
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <div class="container">
+
+        <header class="mt-5 p-3">
+            <h1>Gastos mensuales</h1>
+        </header>
+
+        <div class="contenedor p-3">
+            <div class="col me-3">
+                <form id="agregar-gasto" >
+                    <h3>Añadir nuevo gasto</h3>
+                    
+                    <div class="grupo1 mt-5 form-group">
+                        <label class="w-100 fw-bold" for="">Gasto:</label>
+                        <input class="p-2 mb-4 form-control" id="gasto" type="text" placeholder="Descripción del gasto">
+                    </div>
+    
+                    <div class="grupo2 form-group">
+                        <label class="w-100 fw-bold" for="">Monto:</label>
+                        <input class="form-control p-2 mb-4" id="cantidad" type="text" placeholder="Cantidad en $">
+                    </div>
+    
+                    <div class="d-flex justify-content-center">
+                        <input class="btn btn-primary" type="submit" value="AGREGAR">
+                    </div>
+                </form>
+            </div>
+            
+            <div class="col ms-3">
+                <h3>Lista de gastos</h3>
+
+                <div id="gastos">
+                    <ul class="list-group"></ul>
+                </div>
+
+                <div id="presupuesto" class="money mt-5">
+                    <div class="group1 p-2 mb-2">
+                        <p>PRESUPUESTO: $ 
+                            <span class="fw-bold" id="total"> </span>
+                        </p>
+                    </div>
+
+                    <div class="group2 p-2">
+                        <p>RESTANTE: $ 
+                            <span class="fw-bold" id="restante"> </span> 
+                        </p>
+                    </div>
+                </div>
+
+                <div class="resultado">
+
+                </div>
+
+            </div>
+        </div>
+
+        <div class="d-flex justify-content-center mt-5 " id="btnReiniciar">
+            <input class="btn btn-dark btn-lg" type="submit" value="REINICIAR MES">
+        </div>
+
+    </div>
+
+    <script src="app.js"></script>
+</body>
+</html>
