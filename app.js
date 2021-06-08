@@ -7,6 +7,7 @@ class Presupuesto{
         this.presupuesto=Number(presupuesto);
         this.restante=Number(presupuesto);
         this.gastos=[];
+        this.fecha= Number (presupuesto);
     };
 
     nuevoGasto(gasto){
@@ -59,13 +60,13 @@ class UI{
 
         gastos.forEach(gast => {
 
-            const {cant, nombre, id}= gast;
+            const {cant, nombre, id, fecha}= gast;
 
             const nuevoGasto= document.createElement("li");
             nuevoGasto.className="list-group-item d-flex justify-content-between align-items-center";
             nuevoGasto.dataset.id=id;
             nuevoGasto.innerHTML=`
-                ${nombre} <span class=" badge bg-primary" bg-pill> ${cant} </span>
+                <span class="badge bg-secondary"> ${fecha} </span> ${nombre} <span class=" badge bg-primary" bg-pill> ${cant} </span>
             `;
 
             const btnBorrar= document.createElement("button");
@@ -88,7 +89,11 @@ class UI{
 
     actualizarRestante(){
         let presu= presupuesto.restante;
-
+        if(presu<0){
+            formulario.querySelector('input[type="submit"]').disabled=true;
+        }else{
+            formulario.querySelector('input[type="submit"]').disabled=false;
+        }
         document.querySelector("#restante").textContent=presu;
     };
 
@@ -139,9 +144,11 @@ function preguntarPresupuesto(){
         ui.insertarPresupuesto(presupuesto);
 
         guardarLocalStorage(presupuesto);
-        console.log("1")
     }
     else{
+        if(hayAlgo.restante<0){
+            formulario.querySelector('input[type="submit"]').disabled=true;
+        }
         const pasoPresupuestoAstring= String(hayAlgo.presupuesto);
         presupuesto= new Presupuesto(pasoPresupuestoAstring);
         presupuesto.actualizarRestanteYgasto(Number(hayAlgo.restante), hayAlgo.gastos);
@@ -149,7 +156,6 @@ function preguntarPresupuesto(){
         ui.insertarPresupuesto(presupuesto);
 
         ui.imprimirListadoGastos(presupuesto.gastos);
-        console.log("2")
     }
 }
 
@@ -173,7 +179,8 @@ function agregarGasto(e){
         const gasto={
             nombre, 
             cant,
-            id:Date.now()
+            id:Date.now(),
+            fecha: new Date().toLocaleDateString()
         }; 
 
         presupuesto.nuevoGasto(gasto);
