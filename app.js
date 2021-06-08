@@ -129,15 +129,17 @@ function eventListeners(){
 function preguntarPresupuesto(){
     const hayAlgo=cargarLocalStorage();
 
-    if(hayAlgo==null || hayAlgo.presu==null){
+    if(hayAlgo==null || hayAlgo.presupuesto==null){
         const presupuestoUsuario= prompt("Ingresa tu presupuesto mensual: ");
         if(presupuestoUsuario === "" || presupuestoUsuario === null || isNaN(presupuestoUsuario) || presupuestoUsuario<=0){
         window.location.reload();
+        return;
         }
         presupuesto= new Presupuesto(presupuestoUsuario);
         ui.insertarPresupuesto(presupuesto);
 
         guardarLocalStorage(presupuesto);
+        console.log("1")
     }
     else{
         const pasoPresupuestoAstring= String(hayAlgo.presupuesto);
@@ -147,6 +149,7 @@ function preguntarPresupuesto(){
         ui.insertarPresupuesto(presupuesto);
 
         ui.imprimirListadoGastos(presupuesto.gastos);
+        console.log("2")
     }
 }
 
